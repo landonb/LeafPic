@@ -1,22 +1,20 @@
 apply plugin: 'com.android.application'
 
 repositories {
-    jcenter()
     maven  { url "http://repo1.maven.org/maven2" }
     maven { url  "http://dl.bintray.com/dasar/maven" }
 }
 
-project.ext.supportLib = "24.1.1"
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "org.horaapps.leafpic"
         minSdkVersion 19
-        targetSdkVersion 24
-        versionName "v0.6-beta-1"
-        versionCode 13
+        targetSdkVersion 25
+        versionName "v0.6-beta-2"
+        versionCode 14
     }
     lintOptions {
         disable 'MissingTranslation'
@@ -27,10 +25,7 @@ android {
     aaptOptions {
         additionalParameters "--no-version-vectors"
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_6
-        targetCompatibility JavaVersion.VERSION_1_6
-    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -53,6 +48,8 @@ android {
     }
 }
 
+project.ext.supportLib = "25.0.1"
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile "com.android.support:appcompat-v7:$supportLib"
@@ -70,12 +67,15 @@ dependencies {
     compile 'com.mikepenz:fontawesome-typeface:4.6.0.1@aar'
     compile 'com.yalantis:ucrop:1.5.0'
     compile 'uz.shift:colorpicker:0.5@aar'
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
+    compile 'com.google.android.exoplayer:exoplayer:r2.0.4'
     compile 'de.psdev.licensesdialog:licensesdialog:1.8.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.drewnoakes:metadata-extractor:2.9.1'
     compile 'org.jetbrains:annotations-java5:15.0'
     compile 'com.turingtechnologies.materialscrollbar:lib:10.0.3'
-    compile project(':photoview')
-    compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
+    compile 'com.github.chrisbanes:PhotoView:1.3.0'
+    compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
+    compile 'com.github.Commit451:bypasses:1.0.4'
+
+    compile 'com.github.jetradarmobile:desertplaceholder:1.1.1'
 }

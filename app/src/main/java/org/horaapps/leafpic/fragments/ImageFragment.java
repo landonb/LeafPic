@@ -14,7 +14,7 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
 import org.horaapps.leafpic.R;
 import org.horaapps.leafpic.activities.SingleMediaActivity;
-import org.horaapps.leafpic.data.Media;
+import org.horaapps.leafpic.model.Media;
 import org.horaapps.leafpic.util.PreferenceUtil;
 import org.horaapps.leafpic.views.RotateTransformation;
 
@@ -31,13 +31,13 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class ImageFragment extends Fragment {
 
     private Media img;
+    private final String TAG = "asd";
 
     public static ImageFragment newInstance(Media media) {
         ImageFragment imageFragment = new ImageFragment();
         Bundle args = new Bundle();
         args.putParcelable("image", media);
         imageFragment.setArguments(args);
-
         return imageFragment;
     }
 
@@ -50,9 +50,10 @@ public class ImageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        if (PreferenceUtil.getInstance(getContext()).getBoolean(getString(R.string.preference_sub_scaling) , false)) {
+        if (PreferenceUtil.getInstance(getContext()).getBoolean(getString(R.string.preference_sub_scaling) , true)) {
             SubsamplingScaleImageView imageView = new SubsamplingScaleImageView(getContext());
-            imageView.setImage(ImageSource.uri(img.getUri()));
+            imageView.setImage(ImageSource.uri(img.getUri()).tilingEnabled());
+            imageView.setOrientation(SubsamplingScaleImageView.ORIENTATION_0);
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -2,35 +2,19 @@ package org.horaapps.leafpic;
 
 import android.app.Application;
 
-import org.horaapps.leafpic.data.Album;
-import org.horaapps.leafpic.data.HandlingAlbums;
+import org.horaapps.leafpic.model.Album;
+import org.horaapps.leafpic.model.HandlingAlbums;
 
 /**
  * Created by dnld on 28/04/16.
  */
 public class MyApplication extends Application {
 
-    private HandlingAlbums albums = null;
-
     public Album getAlbum() {
-        return albums.dispAlbums.size() > 0 ? albums.getCurrentAlbum() : Album.getEmptyAlbum();
-    }
-
-    @Override
-    public void onCreate() {
-        albums = new HandlingAlbums(getApplicationContext());
-        super.onCreate();
+        return getAlbums().getCount() > 0 ? getAlbums().getCurrentAlbum() : Album.getEmptyAlbum();
     }
 
     public HandlingAlbums getAlbums() {
-        return albums;
-    }
-
-    public void setAlbums(HandlingAlbums albums) {
-        this.albums = albums;
-    }
-
-    public void updateAlbums() {
-        albums.loadAlbums(getApplicationContext());
+        return HandlingAlbums.getInstance(getApplicationContext());
     }
 }
