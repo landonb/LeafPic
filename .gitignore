@@ -11,3 +11,8 @@
 /captures
 /scripts/crowdin.key
 /app/src/main/assets/secretconstants.properties
+
+# 2018-03-28: Why so many dirty, untracted files from years ago?
+app/.externalNativeBuild/
+photoview/build/
+

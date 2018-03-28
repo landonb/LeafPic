@@ -521,6 +521,9 @@ public class SingleMediaActivity extends SharedMediaActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) { dialog.dismiss(); }});
 
+//android.os.Debug.waitForDebugger();
+String myString = getString(R.string.fix_date);
+
                 detailsDialog.setButton(DialogInterface.BUTTON_NEUTRAL, getString(R.string.fix_date).toUpperCase(), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

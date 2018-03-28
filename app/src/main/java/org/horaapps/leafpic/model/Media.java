@@ -188,11 +188,41 @@ public class Media implements Parcelable, Serializable {
             GeoLocation location;
             if ((location = metadata.getLocation()) != null)
                 details.put(context.getString(R.string.location), location.toDMSString());
+// [landonb]
+            try {
+                Metadata metadata = ImageMetadataReader.readMetadata(new File(path));
+//
+//                print(metadata, details);
+            } catch (ImageProcessingException e) {
+                details.put("ImageProcessingException", e.getMessage());
+            } catch (IOException e) {
+                details.put("IOException", e.getMessage());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return details;
+    }
+
+    private static void print(Metadata metadata, MediaDetailsMap<String, String> details)
+    {
+        System.out.println("-------------------------------------");
+        // Iterate over the data and print to System.out
+        // A Metadata object contains multiple Directory objects
+        for (Directory directory : metadata.getDirectories()) {
+            // Each Directory stores values in Tag objects
+            for (Tag tag : directory.getTags()) {
+                System.out.println(tag);
+                details.put(tag.getTagName(), directory.getObject(tag.getTagType())+"");
+            }
+            // Each Directory may also contain error messages
+            if (directory.hasErrors()) {
+                for (String error : directory.getErrors()) {
+                    System.err.println("ERROR: " + error);
+                }
+            }
+        }
     }
 
     public boolean setOrientation(final int orientation) {

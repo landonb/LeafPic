@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -71,6 +72,8 @@ import org.horaapps.leafpic.views.GridSpacingItemDecoration;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import com.adroitandroid.chipcloud.ChipCloud;
+import com.adroitandroid.chipcloud.ChipListener;
 
 public class MainActivity extends SharedMediaActivity {
 
@@ -168,6 +171,50 @@ public class MainActivity extends SharedMediaActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         coordinatorMainLayout = (CoordinatorLayout) findViewById(R.id.coordinator_main_layout);
         SP = PreferenceUtil.getInstance(getApplicationContext());
+
+
+
+ChipCloud chipCloud = (ChipCloud) findViewById(R.id.chip_cloud);
+
+String[] someStringArray = new String[] { "one", "two", };
+
+new ChipCloud.Configure()
+        .chipCloud(chipCloud)
+        .selectedColor(Color.parseColor("#ff00cc"))
+        .selectedFontColor(Color.parseColor("#ffffff"))
+        .deselectedColor(Color.parseColor("#e1e1e1"))
+        .deselectedFontColor(Color.parseColor("#333333"))
+        .selectTransitionMS(500)
+        .deselectTransitionMS(250)
+        .labels(someStringArray)
+        .mode(ChipCloud.Mode.MULTI)
+        .allCaps(false)
+        //.gravity(ChipCloud.Gravity.CENTER)
+        .gravity(ChipCloud.Gravity.STAGGERED)
+        .textSize(getResources().getDimensionPixelSize(R.dimen.default_textsize))
+        .verticalSpacing(getResources().getDimensionPixelSize(R.dimen.vertical_spacing))
+        .minHorizontalSpacing(getResources().getDimensionPixelSize(R.dimen.min_horizontal_spacing))
+//
+//        .typeface(Typeface.createFromAsset(getContext().getAssets(), "RobotoSlab-Regular.ttf"))
+//        .typeface(Typeface.createFromAsset(MainActivity.getContext().getAssets(), "Roboto-Regular.ttf"))
+        .typeface(Typeface.createFromAsset(getApplicationContext().getAssets(), "Roboto-Regular.ttf"))
+        .chipListener(new ChipListener() {
+            @Override
+            public void chipSelected(int index) {
+                //...
+            }
+            @Override
+            public void chipDeselected(int index) {
+                //...
+            }
+        })
+        .build();
+
+chipCloud.addChip("Foo");
+chipCloud.addChip("Bar");
+//or
+//chipCloud.addChips(someStringArray);
+//new ChipCloud.Configure().chipCloud(binding.chipCloud).labels(newChipLabels).update();
 
         initUi();
         displayData(getIntent());

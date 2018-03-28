@@ -25,6 +25,9 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:visibility="gone" />
+            <!--
+            android:layout_height="150dp"
+            -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -40,16 +43,26 @@
                     android:id="@+id/ll_list_details"
                     android:orientation="vertical"
                     android:paddingTop="@dimen/small_spacing" />
+                <!--
+                    https://stackoverflow.com/questions/25665020/imageview-taking-too-much-vertical-space
+android:scaleType="fitXY"
+android:adjustViewBounds="true"
+android:background="#FF0000FF"
+android:paddingBottom="0dp"
+                 -->
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:id="@+id/details_showmore"
                     android:text="@string/show_more"
                     android:textSize="@dimen/medium_text"
-                    android:visibility="gone"
+android:textColor="#FF000000"
                     android:gravity="center"
                     android:clickable="true"
                     android:background="@drawable/ripple" />
+                <!-- landonb
+                    android:visibility="gone"
+                    -->
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

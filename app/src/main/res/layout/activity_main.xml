@@ -18,10 +18,44 @@
             <include
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar" />
+
+            <!--
+            <com.adroitandroid.chipcloud.ChipCloud
+                android:id="@+id/chip_cloud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            -->
+            <com.adroitandroid.chipcloud.ChipCloud
+                xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/chip_cloud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                chipcloud:deselectedColor="@color/deselected_color"
+                chipcloud:deselectedFontColor="@color/deselected_font_color"
+                chipcloud:selectedColor="@color/selected_color"
+                chipcloud:selectedFontColor="@color/selected_font_color"
+                chipcloud:deselectTransitionMS="500"
+                chipcloud:selectTransitionMS="750"
+                chipcloud:labels="@array/labels"
+                chipcloud:selectMode="multi"
+                chipcloud:allCaps="true"
+                chipcloud:gravity="staggered"
+                chipcloud:minHorizontalSpacing="32dp"
+                chipcloud:verticalSpacing="16dp"
+                chipcloud:textSize="14sp"
+                chipcloud:typeface="Roboto-Regular.ttf"
+                /> <!--path relative to assets folder-->
+                <!--
+                chipcloud:typeface="RobotoSlab-Regular.ttf"
+                -->
+
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/swipeRefreshLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
                 <RelativeLayout
                     android:id="@+id/rl_main_content"
                     android:layout_width="match_parent"
@@ -67,5 +101,3 @@
         android:id="@+id/drawer_items"
         layout="@layout/drawer"/>
 </android.support.v4.widget.DrawerLayout>
-
-

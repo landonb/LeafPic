@@ -14,6 +14,7 @@ import android.text.method.LinkMovementMethod;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -150,6 +151,10 @@ public class AlertDialogsHelper {
 
         }
 
+// [landonb]
+System.out.println("-------------------------------------");
+System.out.println("SHOW MORE");
+
         final TextView showMoreText = (TextView) dialogLayout.findViewById(R.id.details_showmore);
         showMoreText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,13 +166,52 @@ public class AlertDialogsHelper {
 
         detailsDialogBuilder.setView(dialogLayout);
         loadDetails(dialogLayout,activity, mainDetails);
-        return detailsDialogBuilder.create();
+//        AlertDialog detailsDialog = detailsDialogBuilder.create();
+        final AlertDialog detailsDialog = detailsDialogBuilder.create();
+
+        /*
+        detailsDialog.setButton(
+            DialogInterface.BUTTON_NEGATIVE,
+            //"Show More",
+            activity.getString(R.string.show_more).toUpperCase(),
+            new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                showMoreDetails(dialogLayout, activity, f);
+                showMoreText.setVisibility(View.GONE);
+            }
+        });
+        */
+        //detailsDialog.setNegativeButton(activity.getString(R.string.show_more).toUpperCase(), null);
+        detailsDialog.setButton(
+            DialogInterface.BUTTON_NEGATIVE,
+            activity.getString(R.string.show_more).toUpperCase(),
+            (DialogInterface.OnClickListener) null
+        );
+        detailsDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button b = detailsDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                b.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showMoreDetails(dialogLayout, activity, f);
+                        showMoreText.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });  
+
+        return detailsDialog;
     }
 
     private static void loadDetails(View dialogLayout, ThemedActivity activity, MediaDetailsMap<String, String> metadata) {
         LinearLayout detailsTable = (LinearLayout) dialogLayout.findViewById(R.id.ll_list_details);
 
         int tenPxInDp = Measure.pxToDp (10, activity);
+
+System.out.println("loadDetails");
 
         for (int index : metadata.getKeySet()) {
             LinearLayout row = new LinearLayout(activity.getApplicationContext());
